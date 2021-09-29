@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import com.employeepayroll.employeepayroll.EmployeePayrollFileIOService.IOService;
 
+
 public class EmployeePayrollServiceTest {
     @Test 
     public void given3EmployeesWhenWrittenToFileShouldMatchEmployeeEntries() {
@@ -19,6 +20,8 @@ public class EmployeePayrollServiceTest {
         employeePayrollService =new EmployeePayrollService(Arrays.asList(arrayOfEmps));
         employeePayrollService.writeEmployeePayrollData(IOService.FIlE_IO);
         long entries=employeePayrollService.countEntries(IOService.FIlE_IO);
+        employeePayrollService.printData();
         assertEquals(3,entries);
-    }
+    } 
+    
 }

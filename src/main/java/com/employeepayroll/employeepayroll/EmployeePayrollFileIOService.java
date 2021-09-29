@@ -4,11 +4,13 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
-import java.util.*;
 /**
  * Employee Payroll Service to Read and Write Employee Payroll to a Console
+
  */
 public class EmployeePayrollFileIOService {
     public enum IOService{
@@ -47,8 +49,7 @@ public class EmployeePayrollFileIOService {
             new EmployeePayrollFileIOService().writeData(employeePayrollList);
         }
     }
-
-	/**
+    /**
      * Read the information from the Console
      * @param consoleInputReader console input reader
      */
@@ -64,4 +65,10 @@ public class EmployeePayrollFileIOService {
     public long countEntries(IOService ioService) {  
         return new EmployeePayrollFileIOService().countEntries(ioService);
     }
+    
+    public void printData()
+    {
+        new EmployeePayrollFileIOService().printData();
+    }
+    
 }
