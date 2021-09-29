@@ -1,7 +1,6 @@
 package com.employeepayroll.employeepayroll;
 
 import java.util.*;
-
 public class EmployeePayrollService {
 
 	public enum IOService {
@@ -45,7 +44,6 @@ public class EmployeePayrollService {
 		employeePayrollList.add(new EmployeePayrollData(id, name, salary));
 	}
 
-     //main method
 	public static void main(String[] args) {
 		ArrayList<EmployeePayrollData> employeepayrollList = new ArrayList<>();
 		EmployeePayrollService employeePayrollService = new EmployeePayrollService(employeepayrollList);
