@@ -5,9 +5,7 @@ import static org.junit.Assert.assertEquals;
 import java.util.*;
 import org.junit.Test;
 
-import com.employeepayroll.employeepayroll.EmployeePayrollFileIOService.IOService;
-
-
+import com.employeepayroll.employeepayroll.EmployeePayrollService.IOService;
 public class EmployeePayrollServiceTest {
     @Test 
     public void given3EmployeesWhenWrittenToFileShouldMatchEmployeeEntries() {
@@ -22,6 +20,12 @@ public class EmployeePayrollServiceTest {
         long entries=employeePayrollService.countEntries(IOService.FIlE_IO);
         employeePayrollService.printData();
         assertEquals(3,entries);
-    } 
+    }
     
+    @Test
+    public void givenFileOnReadingFromFileShouldMatchEmployeeCount() {
+        EmployeePayrollService employeePayrollService = new EmployeePayrollService();
+        long entries=employeePayrollService.readEmployeePayrollData();
+        assertEquals(3,entries);
+    }
 }
