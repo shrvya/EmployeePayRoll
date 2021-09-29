@@ -16,6 +16,7 @@ public class EmployeePayrollService {
 
 	/**
 	 * Create Employee Payroll Class of id, name and Salary
+	 * 
 	 * @param employeePayrollList list containing id,name and salary
 	 */
 	public EmployeePayrollService(List<EmployeePayrollData> employeePayrollList) {
@@ -31,6 +32,7 @@ public class EmployeePayrollService {
 
 	/**
 	 * Read the information from the Console
+	 * 
 	 * @param consoleInputReader console input reader
 	 */
 	private void readEmployeePayrollData(Scanner consoleInputReader) {
@@ -43,6 +45,7 @@ public class EmployeePayrollService {
 		employeePayrollList.add(new EmployeePayrollData(id, name, salary));
 	}
 
+     //main method
 	public static void main(String[] args) {
 		ArrayList<EmployeePayrollData> employeepayrollList = new ArrayList<>();
 		EmployeePayrollService employeePayrollService = new EmployeePayrollService(employeepayrollList);
