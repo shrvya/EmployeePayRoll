@@ -12,63 +12,54 @@ import java.util.Scanner;
  * Employee Payroll Service to Read and Write Employee Payroll to a Console
 
  */
+
 public class EmployeePayrollFileIOService {
-    public enum IOService{
-        CONSOLE_IO,FIlE_IO,DB_IO,REST_IO
-    }
-    private List<EmployeePayrollData> employeePayrollList;
-    public EmployeePayrollFileIOService()
-    {
-        System.out.println("Welcome to employee payroll service!!!");
-    }
-    /**
-     * Create Employee Payroll Class of id, name and Salary
-     * @param employeePayrollList list containing id,name and salary
-     */
-    public  EmployeePayrollFileIOService(List<EmployeePayrollData> employeePayrollList)
-    {
-        this.employeePayrollList=employeePayrollList;
-    }
-    public static void main(String[] args) {
-        ArrayList<EmployeePayrollData> employeepayrollList=new ArrayList<>();
-        EmployeePayrollFileIOService employeePayrollService=new EmployeePayrollFileIOService(employeepayrollList);
-        Scanner consoleInputReader=new Scanner(System.in);
-        employeePayrollService.readEmployeePayrollData(consoleInputReader);
-        employeePayrollService.writeEmployeePayrollData(IOService.FIlE_IO);
-    }
-    /**
-     * write the Employee Payroll to the Console
-     */
-    public void writeEmployeePayrollData(IOService ioService) {
-        if(ioService.equals(IOService.CONSOLE_IO))
+	public static final String PAYROLL_FILE_NAME="C:\\Users\\Shrivya\\eclipse-workspace\\EmployeePayRole\\src\\main\\java\\com\\bridgelabz\\hotel_reservation_system\\EmployeePayRole\\payroll-file.txt.txt";
+	public void writeData(List<EmployeePayrollData> employeePayrollList) {
+		StringBuffer empBuffer=new StringBuffer();
+		employeePayrollList.forEach(employee->{
+			String emloyeeDataString=employee.toString().concat("\n");
+			empBuffer.append(emloyeeDataString);     
+		});
+		try {
+			Files.write(Paths.get(PAYROLL_FILE_NAME),empBuffer.toString().getBytes());
+		}catch(IOException e)
+		{
+			e.printStackTrace();
+		}
+	}
+	public long countEntries() {
+		long entries=0;
+		try {
+			entries=Files.lines(new File(PAYROLL_FILE_NAME).toPath()).count();
+		}catch(IOException e)
+		{
+			e.printStackTrace();
+		}
+		return entries;
+	}
+
+	public void printData() {
+		try {
+			Files.lines(new File(PAYROLL_FILE_NAME).toPath())
+			.forEach(System.out::println);   
+		}catch(IOException e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
+	public List<EmployeePayrollData> readData(){
+        List<EmployeePayrollData> employeePayrollList=new ArrayList<>();
+        try {
+            Files.lines((new File(PAYROLL_FILE_NAME).toPath()))
+            .map(line->line.trim())
+            .forEach(line->System.out.println(line));
+        }catch(IOException e)
         {
-            System.out.println("\nWriting Employee Payroll roaster to console\n"+employeePayrollList);   
+            e.printStackTrace();
         }
-        else if(ioService.equals(IOService.FIlE_IO))
-        {
-            new EmployeePayrollFileIOService().writeData(employeePayrollList);
-        }
+        return employeePayrollList;
     }
-    /**
-     * Read the information from the Console
-     * @param consoleInputReader console input reader
-     */
-   public void readEmployeePayrollData(Scanner consoleInputReader) {
-        System.out.println("Enter Employee Id:");
-        int id=consoleInputReader.nextInt();
-        System.out.println("Enter Employee Name:");
-        String name=consoleInputReader.next();
-        System.out.println("Enter Employee Salary:");
-        double salary=consoleInputReader.nextDouble();
-        employeePayrollList.add(new EmployeePayrollData(id, name, salary));       
-    }
-    public long countEntries(IOService ioService) {  
-        return new EmployeePayrollFileIOService().countEntries(ioService);
-    }
-    
-    public void printData()
-    {
-        new EmployeePayrollFileIOService().printData();
-    }
-    
+
 }
